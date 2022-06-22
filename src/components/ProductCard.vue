@@ -2,24 +2,22 @@
   <v-card height="150" class="pa-2">
     <v-row dense>
       <v-col cols="2">
-        <img width="120" height="120" alt="Vue logo" src="../assets/logo.svg">
+        <img alt="Vue logo" src="../assets/logo.svg">
       </v-col>
       <v-col cols="10">
         <div class="infoCard">
           <v-card-title class="pt-0 primary--text">
-            Cafe Badilico
+            {{ product.title }}
             <v-spacer></v-spacer>
             <v-btn icon>
-              <v-icon>mdi-leaf</v-icon>
+              <v-icon :color="product.leaf ? 'success': ''">mdi-leaf</v-icon>
             </v-btn>
             <v-btn icon>
-              <v-icon>mdi-star</v-icon>
+              <v-icon :color="product.star ? 'warning': ''">mdi-star</v-icon>
             </v-btn>
           </v-card-title>
           <v-card-subtitle>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make...
+            {{ product.desc }}
           </v-card-subtitle>
         </div>
 
@@ -30,11 +28,11 @@
             color="primary"
             text
           >
-            Price 4.01€
+            Price {{ product.price }}€
           </v-btn>
           <v-btn
             color="primary"
-            @click="buy"
+            @click="emitAddToCart(product)"
           >
             Add to cart
           </v-btn>
@@ -48,7 +46,7 @@
 <script>
 export default {
   name: 'ProductCard',
-  props: ['content'],
+  props: ['product'],
   data: () => ({
     items: [
       { title: 'Dashboard', icon: 'mdi-view-dashboard' },
@@ -57,11 +55,18 @@ export default {
     ],
     right: null,
   }),
+
+  methods: {
+    emitAddToCart(product) {
+      console.log('emit: ', product);
+      this.$emit('add-to-cart', product);
+    },
+  },
 };
 </script>
 
 <style scoped>
 .infoCard {
-  height: 90px;
+  height: 95px;
 }
 </style>

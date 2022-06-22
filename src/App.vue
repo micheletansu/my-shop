@@ -8,8 +8,7 @@
     >
       <div class="d-flex">
         <v-btn
-          href="https://github.com/vuetifyjs/vuetify/releases/latest"
-          target="_blank"
+          @click="goToShop()"
           text
         >
           <v-icon>mdi-shopping-search</v-icon>
@@ -20,8 +19,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        @click="goToCart()"
         text
       >
         <v-icon>mdi-cart</v-icon>
@@ -30,23 +28,45 @@
     </v-app-bar>
 
     <v-main>
-      <ShopPage/>
+      <ShopPage v-if="context === 'shop'" @add-to-cart="addToCart" />
+      <CartPage v-else :cart="cart" @remove-from-cart="removeFromCart" />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import ShopPage from './components/ShopPage.vue';
+import CartPage from './components/CartPage.vue';
 
 export default {
   name: 'App',
 
   components: {
     ShopPage,
+    CartPage,
   },
 
   data: () => ({
-    //
+    context: 'shop',
+    cart: [],
   }),
+
+  methods: {
+    addToCart(product) {
+      this.cart.push(product);
+    },
+    removeFromCart(product) {
+      const index = this.cart.indexOf(product);
+      if (index > -1) {
+        this.cart.splice(index, 1);
+      }
+    },
+    goToCart() {
+      this.context = 'cart';
+    },
+    goToShop() {
+      this.context = 'shop';
+    },
+  },
 };
 </script>

@@ -1,4 +1,4 @@
-const getContext = (p1, p2) => ([
+const createContext = (p1, p2) => ([
   {
     text: p1,
     disabled: false,
@@ -11,5 +11,5 @@ const getContext = (p1, p2) => ([
   },
 ]);
 
-export default getContext;
-export { getContext };
+export default createContext;
+export { createContext };
