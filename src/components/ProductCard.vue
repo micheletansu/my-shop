@@ -1,8 +1,8 @@
 <template>
   <v-card height="150" class="pa-2">
-    <v-row dense>
-      <v-col cols="2">
-        <img alt="Vue logo" src="../assets/logo.svg">
+    <v-row dense class="fill-height">
+      <v-col cols="2" class="fill-height">
+        <img class="fill-spaces" alt="Vue logo" src="../assets/logo.svg">
       </v-col>
       <v-col cols="10">
         <div class="infoCard">
@@ -68,5 +68,9 @@ export default {
 <style scoped>
 .infoCard {
   height: 95px;
+}
+.fill-spaces {
+  width: 100%;
+  height: 100%;
 }
 </style>
